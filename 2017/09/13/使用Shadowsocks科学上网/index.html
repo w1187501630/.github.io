@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="王宁在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="/img/logo.jpg">
+    <link rel="alternate" type="application/atom+xml" title="WangNing" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        使用Shadowsocks科学上网｜WangNing&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://w1187501630.github.io/2017/09/13/使用Shadowsocks科学上网/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    WangNing
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="/img/ac.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('/img/ac.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>使用Shadowsocks科学上网</h1>
+                    
+                    <span class="meta">
+                         作者 WangNing
+                        <span>
+                          日期 2017-09-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Learn"
+                           title="Learn">Learn</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            使用Shadowsocks科学上网
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="使用Shadowsocks科学上网"><a href="#使用Shadowsocks科学上网" class="headerlink" title="使用Shadowsocks科学上网"></a>使用Shadowsocks科学上网</h1><h2 id="什么是Shadowsocks"><a href="#什么是Shadowsocks" class="headerlink" title="什么是Shadowsocks"></a>什么是Shadowsocks</h2><p><strong>shadowsocks</strong>是一种基于Socks5代理方式的网络数据加密传输包，并采用Apache许可证、GPL、MIT许可证等多种自由软件许可协议开放源代码。shadowsocks分为服务器端和客户端，在使用之前，需要先将服务器端部署到服务器上面，然后通过客户端连接并创建本地代理。目前包使用Python、C、C++、C#、Go语言等编程语言开发。</p>
+<h2 id="使用-Shadowsocks"><a href="#使用-Shadowsocks" class="headerlink" title="使用 Shadowsocks"></a>使用 Shadowsocks</h2><h3 id="1-下载-Shadowsocks"><a href="#1-下载-Shadowsocks" class="headerlink" title="1.下载 Shadowsocks"></a>1.下载 Shadowsocks</h3><h4 id="windos"><a href="#windos" class="headerlink" title="windos:"></a>windos:</h4><p>点击链接直接下载</p>
+<ul>
+<li><a href="http://160.16.231.71/ss-3.4.3.zip" target="_blank" rel="external">SS for Windows</a> (All windows series supported. .NET may required on WinXP)</li>
+<li><a href="http://160.16.231.71/ssr-4.1.4-win.7z" title="SSR for Windows" target="_blank" rel="external">SSR for Windows</a>(All windows series supported. .NET may required on WinXP)</li>
+<li>百度云下载 <blockquote>
+<p>链接：<a href="http://pan.baidu.com/s/1i44XCu5" target="_blank" rel="external">http://pan.baidu.com/s/1i44XCu5</a> 密码：6z2y</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="ANDROID"><a href="#ANDROID" class="headerlink" title="ANDROID:"></a>ANDROID:</h4><ul>
+<li><a href="https://github.com/shadowsocks/shadowsocks-android/releases/download/v4.2.5/shadowsocks-nightly-4.2.5.apk" target="_blank" rel="external">SS for Andoird</a> version 4.2.5(No need to ROOT)</li>
+<li><a href="http://160.16.231.71/ssr-3.3.5.apk" target="_blank" rel="external">SSR for Andoird</a> version 3.3.5(No need to ROOT)</li>
+</ul>
+<blockquote>
+<p> ps：<br>Windows 系统安装运行环境报错时候，请更新您电脑的 <code>.NET framework</code> 组件 前往 <a href="http://www.microsoft.com/net/download/framework" target="_blank" rel="external">官网</a> 下载并安装</p>
+</blockquote>
+<h3 id="使用-Shadowsocks-1"><a href="#使用-Shadowsocks-1" class="headerlink" title="使用 Shadowsocks"></a>使用 Shadowsocks</h3><h4 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h4><p>在电脑任意位置新建文件夹，把.exe安装文件放进去（因为 Shadowsocks 会在安装位置生成一些配置和日志文件，不用理会这些文件就行）<br><img src="https://i.imgur.com/5ymk33q.png" alt=""><br>安装后自动生成一些文件和弹出配置窗口：</p>
+<p><img src="https://i.imgur.com/4ArhQ0A.png" alt=""></p>
+<p>####2. 配置 Shadowsocks ####</p>
+<ol>
+<li>直接输入配置信息<br><img src="https://i.imgur.com/JNxapTe.png" alt=""><br><strong>按照上图图示填写SS服务器地址，端口，密码和加密方式，点确定。</strong><blockquote>
+<p>如果没有账号，别急看到底。</p>
+</blockquote>
+</li>
+</ol>
+<p>点确定后，会如下提示：<br><img src="https://i.imgur.com/D319Nrp.png" alt=""><br>然后启动系统代理：<br>看上图，运行了exe后，桌面右下角就会出现小飞机对图标，右键这个图标，就可以调出软件菜单，然后启用代理</p>
+<p><img src="https://i.imgur.com/D1iv2hk.png" alt=""></p>
+<p>如果嫌麻烦也可以使用下面的方法配置</p>
+<ol>
+<li>使用二维码扫描配置（更方便）<br>运行了exe后，桌面右下角就会出现小飞机 <code>对图标右键这个图标</code> ，就可以调出软件菜单。然后选择  <code>服务器 -&gt; 扫描屏幕上的二维码</code>。软件会会自动识别网页上的二维码图片，并且自动配置到服务器中。<br><img src="https://i.imgur.com/EQ100RU.png" alt=""><br><img src="https://i.imgur.com/W2EKNsg.png" alt=""><br>只有点击确定，然后启用系统代理就行了。<blockquote>
+<p>如果没有账号，别急看到底。</p>
+</blockquote>
+</li>
+</ol>
+<p>好了，大功告成，打开任意浏览器上网吧，就是这么简单，就是这么任性</p>
+<p><img src="https://i.imgur.com/xNwsTow.png" alt=""></p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><blockquote>
+<p>Tips1 如何关闭？退出程序就OK了<br>Tips2 PAC和全局模式是什么意思？PAC模式访问国内网站不通过服务器，全局模式所有网站都通过服务器.一般开PAC模式就行了。</p>
+</blockquote>
+<h4 id="免费账号地址推荐"><a href="#免费账号地址推荐" class="headerlink" title="免费账号地址推荐"></a>免费账号地址推荐</h4><p>1.<a href="https://ss.ishadowx.net/" target="_blank" rel="external">https://ss.ishadowx.net/</a><br><img src="https://i.imgur.com/6572szX.jpg" alt=""><br>2.<a href="https://freess.pub/" target="_blank" rel="external">https://freess.pub/</a><br>3.<a href="http://www.ishadowsocks.com/" target="_blank" rel="external">http://www.ishadowsocks.com/</a><br>4.<a href="http://www.shadowsocks.hk/" target="_blank" rel="external">http://www.shadowsocks.hk/</a></p>
+<h4 id="自行搭建服务器"><a href="#自行搭建服务器" class="headerlink" title="自行搭建服务器"></a>自行搭建服务器</h4><p>未完待续。。。。。。。。</p>
+<h4 id="以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。"><a href="#以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。" class="headerlink" title="以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。"></a>以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。</h4>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/07/hexo-更换主题/" data-toggle="tooltip" data-placement="top"
+                           title="hexo 更换Next主题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Shadowsocks科学上网"><span class="toc-text">使用Shadowsocks科学上网</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是Shadowsocks"><span class="toc-text">什么是Shadowsocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-Shadowsocks"><span class="toc-text">使用 Shadowsocks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载-Shadowsocks"><span class="toc-text">1.下载 Shadowsocks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#windos"><span class="toc-text">windos:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ANDROID"><span class="toc-text">ANDROID:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-Shadowsocks-1"><span class="toc-text">使用 Shadowsocks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装"><span class="toc-text">1.安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tips"><span class="toc-text">tips</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#免费账号地址推荐"><span class="toc-text">免费账号地址推荐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自行搭建服务器"><span class="toc-text">自行搭建服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。"><span class="toc-text">以上内容整理仅用于研究学习，如果用于其他用途造成任意后果，一律概不负责。如有涉及利益和版权，立即删除。</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Learn"
+                           title="Learn">Learn</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a href="www.wang-ning.cn">曾经灬狠宁静</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Wang_Ning_">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/wang-zhu-16-65">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/5185101576">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/profile.php?id=100014560929516">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/w1187501630">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/宁-王-2a75b214a">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; WangNing 2017
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://w1187501630.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/img/vs.jpg">
+</body>
+
+</html>
